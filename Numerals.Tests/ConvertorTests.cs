@@ -14,10 +14,10 @@ namespace Numerals.Tests
         }
 
         [Fact]
-        public void ToRomanNumerals_Throws_OutOfRangeException_When_InputIsGreaterThan1000() {
+        public void ToRomanNumerals_Throws_OutOfRangeException_When_InputIsGreaterThan3000() {
             var unit = new Convertor();
 
-            Assert.Throws(typeof(ArgumentOutOfRangeException), () => unit.ToRomanNumerals(1001));
+            Assert.Throws(typeof(ArgumentOutOfRangeException), () => unit.ToRomanNumerals(3001));
         }
 
         [Theory]
@@ -51,6 +51,25 @@ namespace Numerals.Tests
         [InlineData(99,"XCIX")]
         [InlineData(100,"C")]
         public void ToRomanNumerals_Returns_ExpectedResultForNumbersUpTo100(int input, string expected) {
+            var unit = new Convertor();
+
+            string result = unit.ToRomanNumerals(input);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(555,"DLV")]
+        [InlineData(679,"DCLXXIX")]
+        [InlineData(999,"CMXCIX")]
+        [InlineData(1001,"MI")]
+        [InlineData(1111,"MCXI")]
+        [InlineData(1453,"MCDLIII")]
+        [InlineData(1983,"MCMLXXXIII")]
+        [InlineData(2001,"MMI")]
+        [InlineData(2017,"MMXVII")]
+        [InlineData(3000,"MMM")]
+        public void ToRomanNumerals_Returns_ExpectedResultForNumbersUpTo3000(int input, string expected) {
             var unit = new Convertor();
 
             string result = unit.ToRomanNumerals(input);
