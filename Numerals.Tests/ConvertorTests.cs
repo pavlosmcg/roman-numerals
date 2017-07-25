@@ -5,13 +5,17 @@ namespace Numerals.Tests
 {
     public class ConvertorTests {
 
-        [Fact]
-        public void Returns_I_When_Input_Is_1() {
+        [Theory]
+        [InlineData(1,"I")]
+        [InlineData(2,"II")]
+        [InlineData(3,"III")]
+        [InlineData(4,"IV")]
+        public void Returns_Expected_Result(int input, string expected) {
             var unit = new Convertor();
 
-            string result = unit.ToRomanNumerals(1);
+            string result = unit.ToRomanNumerals(input);
 
-            Assert.Equal("I", result);
+            Assert.Equal(expected, result);
         }
     }
 }
