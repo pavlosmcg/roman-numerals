@@ -29,7 +29,28 @@ namespace Numerals.Tests
         [InlineData(6,"VI")]
         [InlineData(7,"VII")]
         [InlineData(8,"VIII")]
-        public void ToRomanNumerals_Returns_ExpectedResult(int input, string expected) {
+        [InlineData(9,"IX")]
+        [InlineData(10,"X")]
+        public void ToRomanNumerals_Returns_ExpectedResultForNumbersUpTo10(int input, string expected) {
+            var unit = new Convertor();
+
+            string result = unit.ToRomanNumerals(input);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(11,"XI")]
+        [InlineData(14,"XIV")]
+        [InlineData(18,"XVIII")]
+        [InlineData(21,"XXI")]
+        [InlineData(39,"XXXIX")]
+        [InlineData(41,"XLI")]
+        [InlineData(69,"LXIX")]
+        [InlineData(83,"LXXXIII")]
+        [InlineData(99,"XCIX")]
+        [InlineData(100,"C")]
+        public void ToRomanNumerals_Returns_ExpectedResultForNumbersUpTo100(int input, string expected) {
             var unit = new Convertor();
 
             string result = unit.ToRomanNumerals(input);
