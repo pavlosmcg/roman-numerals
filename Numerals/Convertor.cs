@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Numerals 
@@ -13,6 +14,8 @@ namespace Numerals
                 };
 
         public string ToRomanNumerals(int input) {
+            if (input < 1 || input > 1000)
+                throw new ArgumentOutOfRangeException(); 
             return romanNumerals[input];
         }
     }
