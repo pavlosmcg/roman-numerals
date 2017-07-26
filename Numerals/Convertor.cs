@@ -50,5 +50,23 @@ namespace Numerals
 
             return null;
         }
+
+        public int ToNumber(string input) {
+            foreach (var kvp in romanNumerals)
+            {
+                string numeral = kvp.Value;
+                if (input == numeral)
+                    return kvp.Key;
+
+                if (input.Length < numeral.Length)
+                    continue;
+
+                if (input.Substring(0,numeral.Length) == numeral)
+                {
+                    return kvp.Key + ToNumber(input.Substring(numeral.Length)); 
+                }
+            }
+            return 0;
+        }
     }
 }

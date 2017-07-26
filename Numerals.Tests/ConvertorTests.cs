@@ -76,5 +76,44 @@ namespace Numerals.Tests
 
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+        [InlineData("I",1)]
+        [InlineData("II",2)]
+        [InlineData("III",3)]
+        [InlineData("IV",4)]
+        [InlineData("V",5)]
+        [InlineData("VI",6)]
+        [InlineData("VII",7)]
+        [InlineData("VIII",8)]
+        [InlineData("IX",9)]
+        [InlineData("X",10)]
+        [InlineData("XI",11)]
+        [InlineData("XIV",14)]
+        [InlineData("XVIII",18)]
+        [InlineData("XXI",21)]
+        [InlineData("XXXIX",39)]
+        [InlineData("XLI",41)]
+        [InlineData("LXIX",69)]
+        [InlineData("LXXXIII",83)]
+        [InlineData("XCIX",99)]
+        [InlineData("C",100)]
+        [InlineData("DLV",555)] 
+        [InlineData("DCLXXIX",679)] 
+        [InlineData("CMXCIX",999)] 
+        [InlineData("MI",1001)]
+        [InlineData("MCXI",1111)]
+        [InlineData("MCDLIII",1453)]
+        [InlineData("MCMLXXXIII",1983)]
+        [InlineData("MMI",2001)]
+        [InlineData("MMXVII",2017)]
+        [InlineData("MMM",3000)]
+        public void ToNumber_Returns_ExpectedResultForNumbersUpTo3000(string input, int expected){
+            var unit = new Convertor();
+
+            int result = unit.ToNumber(input);
+
+            Assert.Equal(expected, result);
+        }
     }
 }
