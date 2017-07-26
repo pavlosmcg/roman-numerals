@@ -10,14 +10,26 @@ namespace Numerals.Tests
         public void ToRomanNumerals_Throws_OutOfRangeException_When_InputIsLessThan1() {
             var unit = new Convertor();
 
-            Assert.Throws(typeof(ArgumentOutOfRangeException), () => unit.ToRomanNumerals(0));
+            Assert.Throws<ArgumentOutOfRangeException>(() => unit.ToRomanNumerals(0));
         }
 
         [Fact]
         public void ToRomanNumerals_Throws_OutOfRangeException_When_InputIsGreaterThan3000() {
             var unit = new Convertor();
 
-            Assert.Throws(typeof(ArgumentOutOfRangeException), () => unit.ToRomanNumerals(3001));
+            Assert.Throws<ArgumentOutOfRangeException>(() => unit.ToRomanNumerals(3001));
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(0)]
+        [InlineData(8999)]
+        public void ToRomanNumerals_Throws_ExceptionWithMessage_When_InputIsOutOfRange(int input){
+            var unit = new Convertor();
+            
+            var exception = Record.Exception(() => unit.ToRomanNumerals(input));
+
+            Assert.Contains(input.ToString(),exception.Message);
         }
 
         [Theory]
@@ -75,6 +87,23 @@ namespace Numerals.Tests
             string result = unit.ToRomanNumerals(input);
 
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void ToNumber_Throws_FormatException_When_InputIsNotValidRomanNumeral(){
+            var unit = new Convertor();
+            
+            Assert.Throws<FormatException>(() => unit.ToNumber("BLORG"));
+        }
+
+        [Fact]
+        public void ToNumber_Throws_ExceptionWithMessage_When_InputIsNotValidRomanNumeral(){
+            var input = "FRAMISTAN";
+            var unit = new Convertor();
+            
+            var exception = Record.Exception(() => unit.ToNumber(input));
+
+            Assert.Contains(input,exception.Message);
         }
 
         [Theory]

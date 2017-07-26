@@ -32,8 +32,11 @@ namespace Numerals
                 }.Reverse().ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
         public string ToRomanNumerals(int input) {
+            int upper = 3000;
+            int lower = 1;
             if (input < 1 || input > 3000)
-                throw new ArgumentOutOfRangeException(); 
+                throw new ArgumentOutOfRangeException(nameof(input), input,
+                    $"Input must be between '{lower}' and '{upper}'."); 
             
             string numeral;
             if (romanNumerals.TryGetValue(input, out numeral)){
@@ -66,7 +69,8 @@ namespace Numerals
                     return kvp.Key + ToNumber(input.Substring(numeral.Length)); 
                 }
             }
-            return 0;
+            
+            throw new FormatException($"'{input}' is not a valid Roman numeral.");
         }
     }
 }
