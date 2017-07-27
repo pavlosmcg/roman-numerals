@@ -43,11 +43,15 @@ namespace RomanNumerals.Tests{
         [InlineData("MI",1001)]
         [InlineData("MCXI",1111)]
         [InlineData("MCDLIII",1453)]
+        [InlineData("MCMIII",1903)]
         [InlineData("MCMLXXXIII",1983)]
         [InlineData("MMI",2001)]
         [InlineData("MMXVII",2017)]
         [InlineData("MMM",3000)]
-        public void ToNumber_Returns_ExpectedResultForNumbersUpTo3000(string input, int expected){
+        [InlineData("MMMCXVI",3116)]
+        [InlineData("MMMDCCXXVIII",3728)]
+        [InlineData("MMMCMXCIX",3999)]
+        public void ToNumber_Returns_ExpectedResultForNumbersUpTo3999(string input, int expected){
             int result = input.ToNumber();
 
             Assert.Equal(expected, result);

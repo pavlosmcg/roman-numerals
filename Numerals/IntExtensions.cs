@@ -26,13 +26,16 @@ namespace RomanNumerals {
                     {2400,"MMCD"},
                     {2500,"MMD"},
                     {2900,"MMCM"},
-                    {3000,"MMM"}
+                    {3000,"MMM"},
+                    {3400,"MMMCD"},
+                    {3500,"MMMD"},
+                    {3900,"MMMCM"}
                 }.Reverse().ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
         public static string ToRomanNumerals(this int input) {
-            int upper = 3000;
+            int upper = 3999;
             int lower = 1;
-            if (input < 1 || input > 3000)
+            if (input < 1 || input > 3999)
                 throw new ArgumentOutOfRangeException(nameof(input), input,
                     $"Input must be between '{lower}' and '{upper}'."); 
             

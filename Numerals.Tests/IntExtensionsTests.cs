@@ -12,8 +12,8 @@ namespace RomanNumerals.Tests
         }
 
         [Fact]
-        public void ToRomanNumerals_Throws_OutOfRangeException_When_InputIsGreaterThan3000() {
-            Assert.Throws<ArgumentOutOfRangeException>(() => 3001.ToRomanNumerals());
+        public void ToRomanNumerals_Throws_OutOfRangeException_When_InputIsGreaterThan3999() {
+            Assert.Throws<ArgumentOutOfRangeException>(() => 4000.ToRomanNumerals());
         }
 
         [Theory]
@@ -67,11 +67,15 @@ namespace RomanNumerals.Tests
         [InlineData(1001,"MI")]
         [InlineData(1111,"MCXI")]
         [InlineData(1453,"MCDLIII")]
+        [InlineData(1903,"MCMIII")]
         [InlineData(1983,"MCMLXXXIII")]
         [InlineData(2001,"MMI")]
         [InlineData(2017,"MMXVII")]
         [InlineData(3000,"MMM")]
-        public void ToRomanNumerals_Returns_ExpectedResultForNumbersUpTo3000(int input, string expected) {
+        [InlineData(3116,"MMMCXVI")]
+        [InlineData(3728,"MMMDCCXXVIII")]
+        [InlineData(3999,"MMMCMXCIX")]
+        public void ToRomanNumerals_Returns_ExpectedResultForNumbersUpTo3999(int input, string expected) {
             string result = input.ToRomanNumerals();
 
             Assert.Equal(expected, result);
