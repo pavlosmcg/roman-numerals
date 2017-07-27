@@ -15,15 +15,12 @@ namespace RomanNumerals {
             if (NumbersToNumerals.TryGetValue(input, out numeral))
                 return numeral;
             
-            foreach(var item in NumbersToNumerals) {
-                int value = item.Key;
-                if (value < input) {
-                    int remainder = input - value;
-                    return NumbersToNumerals[value] + remainder.ToRomanNumerals();
-                }
-            }
-
-            return null;
+            return NumbersToNumerals
+                .Select(kvp => 
+                    new {number=kvp.Key, numeral=kvp.Value, remainder=input-kvp.Key})
+                .Where(i => i.number < input)
+                .Select(i => string.Concat(i.numeral, i.remainder.ToRomanNumerals()))
+                .First();
         }
     }
 }
