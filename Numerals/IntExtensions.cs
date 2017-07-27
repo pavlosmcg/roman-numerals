@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Numerals 
-{
-    public class Convertor
-    {
-        private Dictionary<int, string> romanNumerals 
+namespace RomanNumerals {
+    public static class IntExtensions {
+        internal static Dictionary<int, string> romanNumerals 
             = new Dictionary<int, string>{
                     {1,"I"},
                     {4,"IV"},
@@ -31,7 +29,7 @@ namespace Numerals
                     {3000,"MMM"}
                 }.Reverse().ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
-        public string ToRomanNumerals(int input) {
+        public static string ToRomanNumerals(this int input) {
             int upper = 3000;
             int lower = 1;
             if (input < 1 || input > 3000)
@@ -47,30 +45,11 @@ namespace Numerals
                 int value = item.Key;
                 if (value < input) {
                     int remainder = input - value;
-                    return romanNumerals[value] + ToRomanNumerals(remainder);
+                    return romanNumerals[value] + remainder.ToRomanNumerals();
                 }
             }
 
             return null;
-        }
-
-        public int ToNumber(string input) {
-            foreach (var kvp in romanNumerals)
-            {
-                string numeral = kvp.Value;
-                if (input == numeral)
-                    return kvp.Key;
-
-                if (input.Length < numeral.Length)
-                    continue;
-
-                if (input.Substring(0,numeral.Length) == numeral)
-                {
-                    return kvp.Key + ToNumber(input.Substring(numeral.Length)); 
-                }
-            }
-            
-            throw new FormatException($"'{input}' is not a valid Roman numeral.");
         }
     }
 }
