@@ -7,12 +7,12 @@ namespace RomanNumerals.Tests
     public class IntExtensionsTests {
 
         [Fact]
-        public void ToRomanNumerals_Throws_OutOfRangeException_When_InputIsLessThan1() {
+        public void ToRomanNumerals_Throws_OutOfRangeException_When_InputIsLessThanLowerLimit() {
             Assert.Throws<ArgumentOutOfRangeException>(() => 0.ToRomanNumerals());
         }
 
         [Fact]
-        public void ToRomanNumerals_Throws_OutOfRangeException_When_InputIsGreaterThan3999() {
+        public void ToRomanNumerals_Throws_OutOfRangeException_When_InputIsGreaterThanUpperLimit() {
             Assert.Throws<ArgumentOutOfRangeException>(() => 4000.ToRomanNumerals());
         }
 
