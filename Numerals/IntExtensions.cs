@@ -19,17 +19,6 @@ namespace RomanNumerals {
                     {500,"D"},
                     {900,"CM"},
                     {1000,"M"},
-                    {1400,"MCD"},
-                    {1500,"MD"},
-                    {1900,"MCM"},
-                    {2000,"MM"},
-                    {2400,"MMCD"},
-                    {2500,"MMD"},
-                    {2900,"MMCM"},
-                    {3000,"MMM"},
-                    {3400,"MMMCD"},
-                    {3500,"MMMD"},
-                    {3900,"MMMCM"}
                 }.Reverse().ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
         public static string ToRomanNumerals(this int input) {
