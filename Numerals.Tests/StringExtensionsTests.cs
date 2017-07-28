@@ -3,9 +3,12 @@ using Xunit;
 
 namespace RomanNumerals.Tests{
     public class StringExtensionsTests {
-        [Fact]
-        public void ToNumber_Throws_FormatException_When_InputIsNotValidRomanNumeral(){
-            Assert.Throws<FormatException>(() => "BLORG".ToNumber());
+        [Theory]
+        [ClassData(typeof(TestData))]
+        public void ToNumber_Returns_ExpectedResultForValidNumeralsUpTo3999(int expected, string input){
+            int result = input.ToNumber();
+
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -16,12 +19,18 @@ namespace RomanNumerals.Tests{
             Assert.Contains(input,exception.Message);
         }
 
-        [Theory]
-        [ClassData(typeof(TestData))]
-        public void ToNumber_Returns_ExpectedResultForNumbersUpTo3999(int expected, string input){
-            int result = input.ToNumber();
+        [Fact]
+        public void ToNumber_Throws_FormatException_When_InputContainsNonValidCharacters(){
+            Assert.Throws<FormatException>(() => "BLORG".ToNumber());
+        }
 
-            Assert.Equal(expected, result);
+        [Theory]
+        [InlineData("XXXXI")]
+        [InlineData("MCMXXXXIII")]
+        [InlineData("IIII")]
+        [InlineData("VIIII")]
+        public void ToNumber_Throws_FormatException_When_InputContains4RepeatedCharacters(string input){
+            Assert.Throws<FormatException>(() => input.ToNumber());
         }
     }
 }
