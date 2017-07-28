@@ -25,11 +25,19 @@ namespace RomanNumerals.Tests{
         }
 
         [Theory]
+        [InlineData("XVIV")]
+        [InlineData("MDCDIII")]
+        [InlineData("LXLIV")]
+        public void ToNumber_Throws_FormatException_When_InputRepeatsNonRepeatableCharacters(string input){
+            Assert.Throws<FormatException>(() => input.ToNumber());
+        }
+
+        [Theory]
         [InlineData("XXXXI")]
         [InlineData("MCMXXXXIII")]
         [InlineData("IIII")]
         [InlineData("VIIII")]
-        public void ToNumber_Throws_FormatException_When_InputContains4RepeatedCharacters(string input){
+        public void ToNumber_Throws_FormatException_When_InputContains4ConsecutiveRepeatedCharacters(string input){
             Assert.Throws<FormatException>(() => input.ToNumber());
         }
     }

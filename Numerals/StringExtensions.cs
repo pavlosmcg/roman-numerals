@@ -6,6 +6,7 @@ namespace RomanNumerals {
     public static class StringExtensions {
         private static string ErrorText = "'{0}' is not a valid Roman numeral.";
         public static int ToNumber(this string input) {
+            CheckForNonRepeatableChars(input);
             CheckForRepeatedConsecutiveChars(input);
 
             return CalculateNumber(input);
@@ -38,6 +39,15 @@ namespace RomanNumerals {
                 if (count > 3)
                     throw new FormatException(string.Format(ErrorText,input));
             }
+        }
+
+        private static void CheckForNonRepeatableChars(string input) {
+            bool repeated = input
+                .Where(c => new[]{'V', 'L', 'D'}.Contains(c))
+                .GroupBy(c => c)
+                .Any(g => g.Count() > 1);
+            if (repeated)
+                throw new FormatException(string.Format(ErrorText,input));
         }
     }
 }
