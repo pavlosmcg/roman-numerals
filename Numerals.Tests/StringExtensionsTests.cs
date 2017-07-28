@@ -18,7 +18,7 @@ namespace RomanNumerals.Tests{
 
         [Theory]
         [ClassData(typeof(TestData))]
-        public void ToNumber_Returns_ExpectedResultForNumbersUpTo3999(string input, int expected){
+        public void ToNumber_Returns_ExpectedResultForNumbersUpTo3999(int expected, string input){
             int result = input.ToNumber();
 
             Assert.Equal(expected, result);
