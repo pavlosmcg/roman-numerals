@@ -7,32 +7,37 @@ namespace RomanNumerals {
         internal static int LowerLimit { get; } = 1;
         internal static int UpperLimit { get; } = 3999;
 
-        internal static Dictionary<int, string> NumeralsDictionary { get; }
-            = new Dictionary<int, string>{
-                {1000,"M"},
-                {900,"CM"},
-                {500,"D"},
-                {400,"CD"},
-                {100,"C"},
-                {90,"XC"},
-                {50,"L"},
-                {40,"XL"},
-                {10,"X"},
-                {9,"IX"},
-                {5,"V"},
-                {4,"IV"},
-                {1,"I"},
+        internal static Dictionary<int, string> NumeralsDictionary { get {
+                return NumeralsLookup.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            }
+        }
+
+        internal static IList<KeyValuePair<int, string>> NumeralsLookup =
+            new List<KeyValuePair<int, string>> {
+                new KeyValuePair<int,string>(1000,"M"),
+                new KeyValuePair<int,string>(900,"CM"),
+                new KeyValuePair<int,string>(500,"D"),
+                new KeyValuePair<int,string>(400,"CD"),
+                new KeyValuePair<int,string>(100,"C"),
+                new KeyValuePair<int,string>(90,"XC"),
+                new KeyValuePair<int,string>(50,"L"),
+                new KeyValuePair<int,string>(40,"XL"),
+                new KeyValuePair<int,string>(10,"X"),
+                new KeyValuePair<int,string>(9,"IX"),
+                new KeyValuePair<int,string>(5,"V"),
+                new KeyValuePair<int,string>(4,"IV"),
+                new KeyValuePair<int,string>(1,"I"),
             };
 
-        internal static IList<KeyValuePair<int, string>> NumeralsLookup { get; }
-            = NumeralsDictionary.OrderByDescending(kvp => kvp.Key).ToList();
+        internal static Dictionary<string,int> NumbersDictionary { get {
+                return NumeralsLookup.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
+            } 
+        }
+            
 
-        private static Dictionary<string,int> numbersDictionary 
-            = NumeralsDictionary.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
-
-        internal static Dictionary<string,int> NumbersDictionary { get; } = numbersDictionary;
-
-        internal static IList<KeyValuePair<string, int>> NumbersLookup { get; }
-            = numbersDictionary.OrderByDescending(kvp => kvp.Value).ToList();
+        internal static IList<KeyValuePair<string, int>> NumbersLookup { get {
+                return NumeralsLookup.Select(kvp => new KeyValuePair<string, int>(kvp.Value, kvp.Key)).ToList();
+            } 
+        }
     }
 }
