@@ -14,17 +14,17 @@ namespace RomanNumerals {
 
         private static int CalculateNumber(string input){
             int number;
-            if (NumeralsToNumbers.TryGetValue(input, out number))
+            if (NumbersDictionary.TryGetValue(input, out number))
                 return number;
 
-            foreach (var item in NumeralsToNumbers) {
+            foreach (var item in NumbersLookup) {
                 string numeral = item.Key;
 
                 if (input.Length < numeral.Length)
                     continue;
 
                 if (input.Substring(0,numeral.Length) == numeral)
-                    return NumeralsToNumbers[numeral] 
+                    return NumbersDictionary[numeral] 
                         + CalculateNumber(input.Substring(numeral.Length));
             }
             

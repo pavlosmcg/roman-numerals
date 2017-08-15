@@ -7,7 +7,7 @@ namespace RomanNumerals {
         internal static int LowerLimit { get; } = 1;
         internal static int UpperLimit { get; } = 3999;
 
-        internal static Dictionary<int, string> NumbersToNumerals { get; }
+        internal static Dictionary<int, string> NumeralsDictionary { get; }
             = new Dictionary<int, string>{
                 {1000,"M"},
                 {900,"CM"},
@@ -24,9 +24,15 @@ namespace RomanNumerals {
                 {1,"I"},
             };
 
-        private static Dictionary<string,int> numeralsToNumbers 
-            = NumbersToNumerals.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
+        internal static IList<KeyValuePair<int, string>> NumeralsLookup { get; }
+            = NumeralsDictionary.OrderByDescending(kvp => kvp.Key).ToList();
 
-        internal static Dictionary<string,int> NumeralsToNumbers { get; } = numeralsToNumbers;
+        private static Dictionary<string,int> numbersDictionary 
+            = NumeralsDictionary.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
+
+        internal static Dictionary<string,int> NumbersDictionary { get; } = numbersDictionary;
+
+        internal static IList<KeyValuePair<string, int>> NumbersLookup { get; }
+            = numbersDictionary.OrderByDescending(kvp => kvp.Value).ToList();
     }
 }

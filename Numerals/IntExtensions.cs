@@ -12,10 +12,10 @@ namespace RomanNumerals {
                     $"Input must be between '{LowerLimit}' and '{UpperLimit}'."); 
             
             string numeral;
-            if (NumbersToNumerals.TryGetValue(input, out numeral))
+            if (NumeralsDictionary.TryGetValue(input, out numeral))
                 return numeral;
             
-            return NumbersToNumerals
+            return NumeralsLookup
                 .Select(kvp => 
                     new {number=kvp.Key, numeral=kvp.Value, remainder=input-kvp.Key})
                 .Where(i => i.number < input)
